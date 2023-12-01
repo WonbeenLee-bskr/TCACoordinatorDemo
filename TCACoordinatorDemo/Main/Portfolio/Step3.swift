@@ -15,6 +15,7 @@ struct Step3 {
         case binding(BindingAction<State>)
         case nextButtonTapped
         case goToSettingTabButtonTapped
+        case goToMagazine4DetailButtonTapped
     }
     var body: some Reducer<State, Action> {
         BindingReducer()
@@ -37,6 +38,10 @@ struct Step3View: View {
                 
                 Button("SettingTab 으로") {
                     viewStore.send(.goToSettingTabButtonTapped)
+                }
+                
+                Button("Magazine4 으로") {
+                    viewStore.send(.goToMagazine4DetailButtonTapped)
                 }
             }
             .toolbar(.hidden, for: .navigationBar)

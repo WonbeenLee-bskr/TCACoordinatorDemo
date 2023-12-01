@@ -37,6 +37,9 @@ struct PortfolioDetailView: View {
                     viewStore.send(.nextButtonTapped)
                 }
             }
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }
+
+// TODO: 네트워킹을 통해 데이터 받아오기 작업 추가

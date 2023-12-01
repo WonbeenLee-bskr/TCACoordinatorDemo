@@ -12,12 +12,14 @@ import TCACoordinators
 @Reducer
 struct PortfolioCoordinator {
     struct State: IdentifiedRouterState, Equatable {
-        static let initialState = Self(routeIDs: [.root(.portfolioDetail, embedInNavigationView: false)])
+        static let initialState = Self(routeIDs: [.root(.portfolioList, embedInNavigationView: false)])
         
+        var portfolioListState = PortfolioList.State()
         var portfolioDetailState = PortfolioDetail.State()
         var step1State = Step1.State()
         var step2State = Step2.State()
         var step3State = Step3.State()
+        var magazineDetailState = MagazineDetail.State()
         
         var routeIDs: IdentifiedArrayOf<Route<PortfolioScreen.State.ID>>
         
@@ -26,6 +28,8 @@ struct PortfolioCoordinator {
                 let routes = routeIDs.map { route -> Route<PortfolioScreen.State> in
                     route.map { id in
                         switch id {
+                        case .portfolioList:
+                            return .portfolioList(portfolioListState)
                         case .portfolioDetail:
                             return .portfolioDetail(portfolioDetailState)
                         case .step1:
@@ -34,6 +38,8 @@ struct PortfolioCoordinator {
                             return .step2(step2State)
                         case .step3:
                             return .step3(step3State)
+                        case .magazineDetail:
+                            return .magazineDetail(magazineDetailState)
                         }
                     }
                 }
@@ -43,6 +49,9 @@ struct PortfolioCoordinator {
                 let routeIDs = newValue.map { route -> Route<PortfolioScreen.State.ID> in
                     route.map { id in
                         switch id {
+                        case .portfolioList(let portfolioListState):
+                            self.portfolioListState = portfolioListState
+                            return .portfolioList
                         case .portfolioDetail(let portfolioDetailState):
                             self.portfolioDetailState = portfolioDetailState
                             return .portfolioDetail
@@ -55,6 +64,9 @@ struct PortfolioCoordinator {
                         case .step3(let step3State):
                             self.step3State = step3State
                             return .step3
+                        case .magazineDetail(let magazineDetailState):
+                            self.magazineDetailState = magazineDetailState
+                            return .magazineDetail
                         }
                     }
                 }
@@ -71,6 +83,10 @@ struct PortfolioCoordinator {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .routeAction(_, action: .portfolioList(.portfolioRowTapped(let portfolioId))):
+                state.portfolioDetailState.portfolioId = portfolioId
+                state.routeIDs.push(.portfolioDetail)
+                return .none
             case .routeAction(_, action: .portfolioDetail(.nextButtonTapped)):
                 state.routeIDs.push(.step1)
                 return .none
@@ -82,6 +98,13 @@ struct PortfolioCoordinator {
                 return .none
             case .routeAction(_, action: .step3(.goToSettingTabButtonTapped)):
                 state.routeIDs.popToRoot()
+                return .none
+            case .routeAction(_, action: .step3(.goToMagazine4DetailButtonTapped)):
+                state.magazineDetailState.magazineId = "magazine4"
+                state.routeIDs.presentSheet(.magazineDetail)
+                return .none
+            case .routeAction(_, action: .magazineDetail(.backButtonTapped)):
+                state.routeIDs.dismiss()
                 return .none
             default:
                 return .none
@@ -99,6 +122,11 @@ struct PortfolioCoordinatorView: View {
         TCARouter(store) { screen in
             SwitchStore(screen) { screen in
                 switch screen {
+                case .portfolioList:
+                    CaseLet(
+                        /PortfolioScreen.State.portfolioList,
+                         action: PortfolioScreen.Action.portfolioList,
+                         then: PortfolioListView.init(store:))
                 case .portfolioDetail:
                     CaseLet(
                         /PortfolioScreen.State.portfolioDetail,
@@ -121,8 +149,20 @@ struct PortfolioCoordinatorView: View {
                         /PortfolioScreen.State.step3,
                          action: PortfolioScreen.Action.step3,
                          then: Step3View.init(store:))
+                case .magazineDetail:
+                    CaseLet(
+                        /PortfolioScreen.State.magazineDetail,
+                         action: PortfolioScreen.Action.magazineDetail,
+                         then: MagazineDetailView.init(store:)
+                    )
                 }
             }
         }
     }
+}
+
+#Preview {
+    PortfolioCoordinatorView(store: .init(initialState: PortfolioCoordinator.State.initialState, reducer: {
+        PortfolioCoordinator()
+    }))
 }

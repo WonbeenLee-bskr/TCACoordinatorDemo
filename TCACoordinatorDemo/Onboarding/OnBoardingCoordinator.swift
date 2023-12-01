@@ -81,10 +81,9 @@ struct OnBoardingCoordinator {
             case .routeAction(_, action: .mainTabCoordinator(
                 .portfolio(.routeAction(_ , action: .step3(.goToSettingTabButtonTapped))))):
                 
-                state.routeIDs.popTo(.mainTabCoordinator)
+//                state.routeIDs.popTo(.mainTabCoordinator)
                 state.switchTab(to: .setting)
                 return .none
-                
             default:
                 return .none
             }

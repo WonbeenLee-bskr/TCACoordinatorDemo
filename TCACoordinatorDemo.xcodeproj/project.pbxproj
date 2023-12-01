@@ -30,6 +30,7 @@
 		AF74324C2B18491E0042212F /* MagazineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74324B2B18491E0042212F /* MagazineScreen.swift */; };
 		AF74324E2B1849240042212F /* MagazineDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74324D2B1849240042212F /* MagazineDetail.swift */; };
 		AF7432502B184B830042212F /* MagazineList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74324F2B184B830042212F /* MagazineList.swift */; };
+		AFEF1C5D2B196B9500EFE357 /* PortfolioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF1C5C2B196B9400EFE357 /* PortfolioList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		AF74324B2B18491E0042212F /* MagazineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineScreen.swift; sourceTree = "<group>"; };
 		AF74324D2B1849240042212F /* MagazineDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineDetail.swift; sourceTree = "<group>"; };
 		AF74324F2B184B830042212F /* MagazineList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineList.swift; sourceTree = "<group>"; };
+		AFEF1C5C2B196B9400EFE357 /* PortfolioList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				AF7432282B16E6380042212F /* PortfolioCoordinator.swift */,
 				AF74322D2B16E8E50042212F /* PortfolioScreen.swift */,
+				AFEF1C5C2B196B9400EFE357 /* PortfolioList.swift */,
 				AF74322B2B16E7C50042212F /* PortfolioDetail.swift */,
 				AF74322F2B16ECC20042212F /* Step1.swift */,
 				AF7432312B16ECC50042212F /* Step2.swift */,
@@ -256,6 +259,7 @@
 				AF7432502B184B830042212F /* MagazineList.swift in Sources */,
 				AF7432402B171B0A0042212F /* OnBoarding.swift in Sources */,
 				AF74323D2B17148B0042212F /* SettingScreen.swift in Sources */,
+				AFEF1C5D2B196B9500EFE357 /* PortfolioList.swift in Sources */,
 				AF7432422B171C230042212F /* OnBoardingScreen.swift in Sources */,
 				AF7432472B17256C0042212F /* MainTabCoordinator.swift in Sources */,
 				AF7432442B1722770042212F /* OnBoardingCoordinator.swift in Sources */,
