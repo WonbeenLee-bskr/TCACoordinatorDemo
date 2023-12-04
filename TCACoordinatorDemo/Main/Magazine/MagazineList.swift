@@ -11,11 +11,11 @@ import SwiftUI
 @Reducer
 struct MagazineList {
     struct State: Equatable {
-        var selectedMagazineId: String = ""
+        var selectedMagazineId: Int = 0
     }
     
     enum Action: Equatable {
-        case magazineRowTapped(magazineId: String)
+        case magazineRowTapped(magazineId: Int)
     }
     
     var body: some ReducerOf<Self> {
@@ -36,16 +36,16 @@ struct MagazineListView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
                 Button("magazine1") {
-                    viewStore.send(.magazineRowTapped(magazineId: "magazine1"))
+                    viewStore.send(.magazineRowTapped(magazineId: 1))
                 }
                 Button("magazine2") {
-                    viewStore.send(.magazineRowTapped(magazineId: "magazine2"))
+                    viewStore.send(.magazineRowTapped(magazineId: 2))
                 }
                 Button("magazine3") {
-                    viewStore.send(.magazineRowTapped(magazineId: "magazine3"))
+                    viewStore.send(.magazineRowTapped(magazineId: 3))
                 }
                 Button("magazine4") {
-                    viewStore.send(.magazineRowTapped(magazineId: "magazine4"))
+                    viewStore.send(.magazineRowTapped(magazineId: 4))
                 }
             }
         }

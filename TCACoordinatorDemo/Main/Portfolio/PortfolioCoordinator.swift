@@ -100,7 +100,7 @@ struct PortfolioCoordinator {
                 state.routeIDs.popToRoot()
                 return .none
             case .routeAction(_, action: .step3(.goToMagazine4DetailButtonTapped)):
-                state.magazineDetailState.magazineId = "magazine4"
+                state.magazineDetailState.magazineId = 4
                 state.routeIDs.presentSheet(.magazineDetail)
                 return .none
             case .routeAction(_, action: .magazineDetail(.backButtonTapped)):
